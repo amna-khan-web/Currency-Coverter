@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter!</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+    <div class="box">
+        <h1>Currency Convert in PKR!</h1>
+
+        <label>Select Currency:</label>
+        <br>
+        <select id="currency">
+            <option value="usa">USA (dollar)</option>
+            <option value="sar">Saudi Arabia (riyal)</option>
+            <option value="eur">Europe (euro)</option>
+            <option value="eng">England (pound)</option>
+            <option value="ind">India (rupee)</option>
+            <option value="jpn">Japan (yen)</option>
+        </select>
+
+        <br><br>
+        <label for="amount">Enter Amount:</label>
+        <br>
+        <input type="number" id="amount" placeholder="e.g., 100" min="0">
+        <br><br>
+
+        <button onclick="convertCurrency()">Convert Now!</button>
+
+        <!-- Result Display -->
+        <p id="result"></p>
+    </div>
+    <script>
+        function convertCurrency() {
+            let amount = parseFloat(document.getElementById("amount").value);
+            let country = document.getElementById("currency").value;
+
+            // Check if the amount is valid
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById("result").innerText = "Please enter a valid amount.";
+                return;
+            }
+
+            // Exchange rates for different currencies to PKR
+            let exchangeRates = {
+                usa: 104.80,  // USA Dollar
+                sar: 28.00,   // Saudi Riyal
+                eur: 120.00,  // Euro
+                eng: 135.00,  // England Pound
+                ind: 1.40,    // Indian Rupee
+                jpn: 0.95,    // Japanese Yen
+            };
+
+            // Get the exchange rate for the selected currency
+            let rate = exchangeRates[country];
+            let totalPkr = amount * rate;
+
+            // Display the result
+            document.getElementById("result").innerText = `Total in Pakistani Rupees: ${totalPkr.toFixed(2)} PKR!`;
+        }
+    </script>
+
+</body>
+
+</html>
